@@ -1,6 +1,6 @@
 import { getBillingProviderService } from "@calcom/ee/billing/di/containers/Billing";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
-import { TeamService } from "@calcom/features/ee/teams/services/teamService";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
+import { TeamService } from "@calcom/features/teams/services/teamService";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { WEBAPP_URL } from "@calcom/lib/constants";

@@ -1,7 +1,7 @@
 import type { NextApiRequest } from "next";
 
 import { getRequestedSlugError } from "@calcom/app-store/stripepayment/lib/team-billing";
-import { purchaseTeamOrOrgSubscription } from "@calcom/features/ee/teams/lib/payments";
+import { purchaseTeamOrOrgSubscription } from "@calcom/features/teams/lib/payments";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { IS_TEAM_BILLING_ENABLED, WEBAPP_URL } from "@calcom/lib/constants";
 import { getTrackingFromCookies } from "@calcom/lib/tracking";

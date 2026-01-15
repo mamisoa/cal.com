@@ -1,4 +1,4 @@
-import { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getBookerBaseUrlSync";
+import { getBookerBaseUrlSync } from "@calcom/lib/getBookerBaseUrlSync";
 
 export const getTeamUrlSync = (
   {

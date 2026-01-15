@@ -2,7 +2,7 @@ import type { ZodEnum } from "zod";
 import { z } from "zod";
 
 import { getFeatureOptInService } from "@calcom/features/di/containers/FeatureOptInService";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { isOptInFeature } from "@calcom/features/feature-opt-in/config";
 import { FeaturesRepository } from "@calcom/features/flags/features.repository";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";

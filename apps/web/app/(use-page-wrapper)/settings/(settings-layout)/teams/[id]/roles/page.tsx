@@ -4,7 +4,7 @@ import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
-import { getTeamWithMembers } from "@calcom/features/ee/teams/lib/queries";
+import { getTeamWithMembers } from "@calcom/features/teams/lib/queries";
 import type { AppFlags } from "@calcom/features/flags/config";
 import { FeaturesRepository } from "@calcom/features/flags/features.repository";
 import { PermissionMapper } from "@calcom/features/pbac/domain/mappers/PermissionMapper";

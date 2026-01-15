@@ -1,7 +1,7 @@
 import type { z } from "zod";
 
 import { getOrgUsernameFromEmail } from "@calcom/features/auth/signup/utils/getOrgUsernameFromEmail";
-import { getParsedTeam } from "@calcom/features/ee/teams/lib/getParsedTeam";
+import { getParsedTeam } from "@calcom/features/teams/lib/getParsedTeam";
 import { createAProfileForAnExistingUser } from "@calcom/features/profile/lib/createAProfileForAnExistingUser";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import logger from "@calcom/lib/logger";

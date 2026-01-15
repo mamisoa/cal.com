@@ -1,5 +1,5 @@
-import { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getBookerBaseUrlSync";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { getBookerBaseUrlSync } from "@calcom/lib/getBookerBaseUrlSync";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import {
   Resource,
   CustomAction,

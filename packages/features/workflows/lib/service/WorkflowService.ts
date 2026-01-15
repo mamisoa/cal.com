@@ -9,8 +9,15 @@ import logger from "@calcom/lib/logger";
 import { WorkflowTriggerEvents } from "@calcom/prisma/enums";
 
 import { WorkflowRepository } from "../../repositories/WorkflowRepository";
-import { cancelWorkflowReminders, scheduleWorkflowReminders } from "../reminders/ReminderScheduler";
-import type { ExtendedCalendarEvent, Workflow } from "../types";
+import {
+  scheduleWorkflowReminders,
+  cancelWorkflowReminders,
+} from "../reminders/ReminderScheduler";
+import type {
+  ExtendedCalendarEvent,
+  ScheduleWorkflowRemindersArgs,
+  Workflow,
+} from "../types";
 import { isSupportedTrigger, SUPPORTED_TRIGGERS } from "../types";
 
 const log = logger.getSubLogger({ prefix: ["WorkflowService"] });
@@ -119,7 +126,7 @@ export class WorkflowService {
     if (workflows && workflows.length > 0) {
       allWorkflows = workflows;
     } else if (eventTypeId) {
-      allWorkflows = await WorkflowService.getAllWorkflowsFromEventType({
+      allWorkflows = await this.getAllWorkflowsFromEventType({
         eventTypeId,
         userId: userId ?? null,
         teamId: teamId ?? null,
@@ -142,7 +149,7 @@ export class WorkflowService {
         ...allWorkflows.filter(
           (workflow) =>
             workflow.trigger === WorkflowTriggerEvents.RESCHEDULE_EVENT ||
-            WorkflowService._beforeAfterEventTriggers.includes(workflow.trigger)
+            this._beforeAfterEventTriggers.includes(workflow.trigger)
         )
       );
     } else if (!isConfirmedByDefault) {
@@ -154,8 +161,9 @@ export class WorkflowService {
       workflowsToTrigger.push(
         ...allWorkflows.filter(
           (workflow) =>
-            WorkflowService._beforeAfterEventTriggers.includes(workflow.trigger) ||
-            (isNormalBookingOrFirstRecurringSlot && workflow.trigger === WorkflowTriggerEvents.NEW_EVENT)
+            this._beforeAfterEventTriggers.includes(workflow.trigger) ||
+            (isNormalBookingOrFirstRecurringSlot &&
+              workflow.trigger === WorkflowTriggerEvents.NEW_EVENT)
         )
       );
     }
@@ -203,7 +211,7 @@ export class WorkflowService {
     if (workflows && workflows.length > 0) {
       allWorkflows = workflows;
     } else if (eventTypeId) {
-      allWorkflows = await WorkflowService.getAllWorkflowsFromEventType({
+      allWorkflows = await this.getAllWorkflowsFromEventType({
         eventTypeId,
         userId: userId ?? null,
         teamId: teamId ?? null,
@@ -218,7 +226,9 @@ export class WorkflowService {
     }
 
     // Filter to only the specified triggers
-    const matchingWorkflows = allWorkflows.filter((workflow) => triggers.includes(workflow.trigger));
+    const matchingWorkflows = allWorkflows.filter((workflow) =>
+      triggers.includes(workflow.trigger)
+    );
 
     if (matchingWorkflows.length === 0) {
       log.debug("No workflows matching triggers", { triggers });
@@ -267,11 +277,11 @@ export class WorkflowService {
   }): Promise<void> {
     // Cancel existing reminders
     if (calendarEvent.uid) {
-      await WorkflowService.cancelWorkflowsForBooking(calendarEvent.uid);
+      await this.cancelWorkflowsForBooking(calendarEvent.uid);
     }
 
     // Trigger cancellation workflows
-    await WorkflowService.scheduleWorkflowsFilteredByTriggerEvent({
+    await this.scheduleWorkflowsFilteredByTriggerEvent({
       calendarEvent,
       eventTypeId,
       userId,
@@ -302,11 +312,11 @@ export class WorkflowService {
   }): Promise<void> {
     // Cancel reminders from previous booking
     if (previousBookingUid) {
-      await WorkflowService.cancelWorkflowsForBooking(previousBookingUid);
+      await this.cancelWorkflowsForBooking(previousBookingUid);
     }
 
     // Schedule workflows for the rescheduled booking
-    await WorkflowService.scheduleWorkflowsForNewBooking({
+    await this.scheduleWorkflowsForNewBooking({
       calendarEvent,
       eventTypeId,
       userId,
@@ -323,5 +333,57 @@ export class WorkflowService {
    */
   static getSupportedTriggers(): WorkflowTriggerEvents[] {
     return [...SUPPORTED_TRIGGERS] as WorkflowTriggerEvents[];
+  }
+
+  /**
+   * Delete workflow reminders when a team is removed.
+   * This cleans up any scheduled reminders that were associated with the team's workflows.
+   */
+  static async deleteWorkflowRemindersOfRemovedTeam(teamId: number): Promise<void> {
+    try {
+      // Find all workflows belonging to this team
+      const teamWorkflows = await WorkflowRepository.findByTeamId(teamId);
+
+      if (teamWorkflows.length === 0) {
+        log.debug("No workflows found for team", { teamId });
+        return;
+      }
+
+      // Get all workflow step IDs for this team's workflows
+      const workflowStepIds = teamWorkflows.flatMap((workflow) =>
+        workflow.steps.map((step) => step.id)
+      );
+
+      if (workflowStepIds.length === 0) {
+        log.debug("No workflow steps found for team", { teamId });
+        return;
+      }
+
+      // Find and delete all reminders for these workflow steps
+      const { prisma } = await import("@calcom/prisma");
+      const remindersToDelete = await prisma.workflowReminder.findMany({
+        where: {
+          workflowStepId: {
+            in: workflowStepIds,
+          },
+        },
+        select: {
+          id: true,
+          referenceId: true,
+          method: true,
+        },
+      });
+
+      if (remindersToDelete.length > 0) {
+        await WorkflowRepository.deleteAllWorkflowReminders(remindersToDelete);
+        log.info("Deleted workflow reminders for removed team", {
+          teamId,
+          reminderCount: remindersToDelete.length,
+        });
+      }
+    } catch (error) {
+      log.error("Failed to delete workflow reminders for team", { error, teamId });
+      throw error;
+    }
   }
 }

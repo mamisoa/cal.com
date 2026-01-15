@@ -1,6 +1,6 @@
 import type { TFunction } from "i18next";
 
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { getTranslation } from "@calcom/lib/server/i18n";
 import type { PrismaClient } from "@calcom/prisma";

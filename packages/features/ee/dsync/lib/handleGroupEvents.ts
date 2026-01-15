@@ -1,6 +1,6 @@
 import type { DirectorySyncEvent, Group } from "@boxyhq/saml-jackson";
 
-import { addNewMembersToEventTypes } from "@calcom/features/ee/teams/lib/queries";
+import { addNewMembersToEventTypes } from "@calcom/features/teams/lib/queries";
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";
 import logger from "@calcom/lib/logger";
 import { safeStringify } from "@calcom/lib/safeStringify";

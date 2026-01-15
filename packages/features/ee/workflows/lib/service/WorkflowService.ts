@@ -5,7 +5,7 @@ import { scheduleWorkflowReminders } from "@calcom/ee/workflows/lib/reminders/re
 import type { timeUnitLowerCase } from "@calcom/ee/workflows/lib/reminders/smsReminderManager";
 import type { Workflow, WorkflowStep } from "@calcom/ee/workflows/lib/types";
 import type { CreditCheckFn } from "@calcom/features/ee/billing/credit-service";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { WorkflowReminderRepository } from "@calcom/features/ee/workflows/repositories/WorkflowReminderRepository";
 import { WorkflowRepository } from "@calcom/features/ee/workflows/repositories/WorkflowRepository";
 import { getHideBranding } from "@calcom/features/profile/lib/hideBranding";

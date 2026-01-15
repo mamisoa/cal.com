@@ -2,8 +2,8 @@ import type { SearchParams } from "app/_types";
 import type { Session } from "next-auth";
 import { unstable_cache } from "next/cache";
 
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
-import { TeamService } from "@calcom/features/ee/teams/services/teamService";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
+import { TeamService } from "@calcom/features/teams/services/teamService";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { ErrorWithCode } from "@calcom/lib/errors";
 import prisma from "@calcom/prisma";

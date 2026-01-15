@@ -46,7 +46,7 @@ vi.mock("@calcom/features/ee/organizations/lib/getBookerUrlServer", () => ({
   getBookerBaseUrl: vi.fn().mockResolvedValue("https://cal.com"),
 }));
 
-vi.mock("@calcom/features/ee/organizations/lib/getBookerBaseUrlSync", () => ({
+vi.mock("@calcom/lib/getBookerBaseUrlSync", () => ({
   getBookerBaseUrlSync: vi.fn().mockReturnValue("https://cal.com"),
 }));
 

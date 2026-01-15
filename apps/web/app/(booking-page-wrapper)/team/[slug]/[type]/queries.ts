@@ -2,8 +2,8 @@ import type { GetServerSidePropsContext } from "next";
 import { unstable_cache } from "next/cache";
 
 import { eventTypeMetaDataSchemaWithTypedApps } from "@calcom/app-store/zod-utils";
-import { getTeamData } from "@calcom/features/ee/teams/lib/getTeamData";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { getTeamData } from "@calcom/features/teams/lib/getTeamData";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import {
   getEventTypeHosts,
   getProfileFromEvent,
@@ -134,7 +134,7 @@ export async function getCRMData(
 
   if (!teamMemberEmail || !crmOwnerRecordType || !crmAppSlug) {
     const { getTeamMemberEmailForResponseOrContactUsingUrlQuery } = await import(
-      "@calcom/features/ee/teams/lib/getTeamMemberEmailFromCrm"
+      "@calcom/features/teams/lib/getTeamMemberEmailFromCrm"
     );
     const {
       email,

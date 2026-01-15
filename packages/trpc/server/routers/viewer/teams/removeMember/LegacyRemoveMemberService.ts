@@ -1,4 +1,4 @@
-import * as teamQueries from "@calcom/features/ee/teams/lib/queries";
+import * as teamQueries from "@calcom/features/teams/lib/queries";
 import { prisma } from "@calcom/prisma";
 import { MembershipRole } from "@calcom/prisma/enums";
 

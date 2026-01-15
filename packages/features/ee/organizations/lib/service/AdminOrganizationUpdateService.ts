@@ -1,6 +1,6 @@
 import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import type { OrganizationRepository } from "@calcom/features/ee/organizations/repositories/OrganizationRepository";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { renameDomain } from "@calcom/lib/domainManager/organization";
 import { getMetadataHelpers } from "@calcom/lib/getMetadataHelpers";
 import { HttpError } from "@calcom/lib/http-error";

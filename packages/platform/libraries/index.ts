@@ -4,7 +4,7 @@ import { getBookingFieldsWithSystemFields } from "@calcom/features/bookings/lib/
 import getBookingInfo from "@calcom/features/bookings/lib/getBookingInfo";
 import handleCancelBooking from "@calcom/features/bookings/lib/handleCancelBooking";
 import { getClientSecretFromPayment } from "@calcom/features/ee/payments/pages/getClientSecretFromPayment";
-import { getTeamMemberEmailForResponseOrContactUsingUrlQuery } from "@calcom/features/ee/teams/lib/getTeamMemberEmailFromCrm";
+import { getTeamMemberEmailForResponseOrContactUsingUrlQuery } from "@calcom/features/teams/lib/getTeamMemberEmailFromCrm";
 import {
   verifyPhoneNumber,
   sendVerificationCode,
@@ -131,7 +131,7 @@ export { sendEmailVerificationByCode } from "@calcom/features/auth/lib/verifyEma
 
 export { checkEmailVerificationRequired } from "@calcom/trpc/server/routers/publicViewer/checkIfUserEmailVerificationRequired.handler";
 
-export { TeamService } from "@calcom/features/ee/teams/services/teamService";
+export { TeamService } from "@calcom/features/teams/services/teamService";
 
 export { BookingAccessService } from "@calcom/features/bookings/services/BookingAccessService";
 export { getTasker } from "@calcom/features/tasker/tasker-factory";

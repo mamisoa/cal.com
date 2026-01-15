@@ -1,7 +1,7 @@
 import type { z } from "zod";
 
 import { whereClauseForOrgWithSlugOrRequestedSlug } from "@calcom/lib/orgDomains";
-import { getParsedTeam } from "@calcom/features/ee/teams/lib/getParsedTeam";
+import { getParsedTeam } from "@calcom/features/teams/lib/getParsedTeam";
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";
 import { DEFAULT_SCHEDULE, getAvailabilityFromSchedule } from "@calcom/lib/availability";
 import { buildNonDelegationCredentials } from "@calcom/lib/delegationCredential";

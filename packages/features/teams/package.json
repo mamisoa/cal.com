@@ -1,0 +1,13 @@
+{
+  "name": "@calcom/features-teams",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "license": "AGPL-3.0",
+  "description": "AGPL-licensed team management for Cal.com",
+  "dependencies": {
+    "@calcom/prisma": "*",
+    "@calcom/lib": "*",
+    "@calcom/features": "*"
+  }
+}

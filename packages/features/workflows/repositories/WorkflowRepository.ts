@@ -4,6 +4,8 @@
  * Database access layer for workflow operations.
  */
 
+import { tasker } from "@calcom/features/tasker";
+import logger from "@calcom/lib/logger";
 import { prisma } from "@calcom/prisma";
 import type { TimeUnit, WorkflowTriggerEvents } from "@calcom/prisma/enums";
 
@@ -264,14 +266,50 @@ export class WorkflowRepository {
   }
 
   /**
-   * Delete all workflow reminders for given IDs or reminder objects
+   * Delete all workflow reminders and cancel their scheduled tasks.
+   * Compatible with EE signature for drop-in replacement.
+   *
+   * @param remindersToDelete - Array of reminder objects with id, referenceId, and method, or null
    */
-  static async deleteAllWorkflowReminders(reminders: number[] | Array<{ id: number }>): Promise<void> {
-    if (reminders.length === 0) return;
+  static async deleteAllWorkflowReminders(
+    remindersToDelete:
+      | Array<{
+          id: number;
+          referenceId?: string | null;
+          method?: string;
+        }>
+      | null
+  ): Promise<void> {
+    if (!remindersToDelete || remindersToDelete.length === 0) return;
 
-    // Extract IDs if array contains objects
-    const ids = reminders.map((r) => (typeof r === "number" ? r : r.id));
+    const log = logger.getSubLogger({ prefix: ["WorkflowRepository"] });
 
+    // Cancel scheduled tasks for each reminder
+    const cancelPromises = remindersToDelete.map(async (reminder) => {
+      try {
+        // Cancel the scheduled task if we have a referenceId
+        if (reminder.referenceId) {
+          await tasker.cancel(reminder.referenceId);
+          log.debug(`Cancelled scheduled task for reminder ${reminder.id}`, {
+            referenceId: reminder.referenceId,
+            method: reminder.method,
+          });
+        }
+      } catch (error) {
+        // Log error but don't fail the entire operation
+        log.error(`Failed to cancel scheduled task for reminder ${reminder.id}`, {
+          error,
+          referenceId: reminder.referenceId,
+          method: reminder.method,
+        });
+      }
+    });
+
+    // Wait for all cancellations to complete (or fail gracefully)
+    await Promise.allSettled(cancelPromises);
+
+    // Delete reminders from database
+    const ids = remindersToDelete.map((r) => r.id);
     await prisma.workflowReminder.deleteMany({
       where: {
         id: {
@@ -279,6 +317,8 @@ export class WorkflowRepository {
         },
       },
     });
+
+    log.info(`Deleted ${ids.length} workflow reminders`);
   }
 
   /**

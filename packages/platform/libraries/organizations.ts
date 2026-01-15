@@ -4,4 +4,4 @@ export { OrganizationMembershipService } from "@calcom/features/ee/organizations
 export type { IOrganizationRepository } from "@calcom/features/ee/organizations/lib/repository/IOrganizationRepository";
 
 export { getOrgFullOrigin, subdomainSuffix } from "@calcom/lib/orgDomains";
-export { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getBookerBaseUrlSync";
+export { getBookerBaseUrlSync } from "@calcom/lib/getBookerBaseUrlSync";

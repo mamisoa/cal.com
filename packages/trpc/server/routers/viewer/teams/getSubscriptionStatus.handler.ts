@@ -2,7 +2,7 @@ import { getTeamBillingServiceFactory } from "@calcom/ee/billing/di/containers/B
 import { SubscriptionStatus } from "@calcom/ee/billing/repository/billing/IBillingRepository";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
-import { TeamService } from "@calcom/features/ee/teams/services/teamService";
+import { TeamService } from "@calcom/features/teams/services/teamService";
 import { IS_TEAM_BILLING_ENABLED } from "@calcom/lib/constants";
 import logger from "@calcom/lib/logger";
 import { MembershipRole } from "@calcom/prisma/enums";

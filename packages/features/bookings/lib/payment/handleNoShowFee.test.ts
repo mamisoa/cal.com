@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import { PaymentServiceMap } from "@calcom/app-store/payment.services.generated";
 import { sendNoShowFeeChargedEmail } from "@calcom/emails/billing-email-service";
 import { CredentialRepository } from "@calcom/features/credentials/repositories/CredentialRepository";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { ErrorCode } from "@calcom/lib/errorCodes";
 import { ErrorWithCode } from "@calcom/lib/errors";
 import { getTranslation } from "@calcom/lib/server/i18n";
@@ -51,7 +51,7 @@ vi.mock("@calcom/features/membership/repositories/MembershipRepository", () => (
   MembershipRepository: MockMembershipRepository,
 }));
 
-vi.mock("@calcom/features/ee/teams/repositories/TeamRepository", () => ({
+vi.mock("@calcom/features/teams/repositories/TeamRepository", () => ({
   TeamRepository: vi.fn().mockImplementation(function() { return {
     findParentOrganizationByTeamId: vi.fn(),
   }; }),

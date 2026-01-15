@@ -2,7 +2,7 @@ import type { TFunction } from "i18next";
 
 import dayjs from "@calcom/dayjs";
 import { CreditsRepository } from "@calcom/features/credits/repositories/CreditsRepository";
-import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
+import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import { IS_SMS_CREDITS_ENABLED } from "@calcom/lib/constants";
 import getOrgIdFromMemberOrTeamId from "@calcom/lib/getOrgIdFromMemberOrTeamId";

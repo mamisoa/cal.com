@@ -9,7 +9,7 @@ import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { getBookingForReschedule, type GetBookingType } from "@calcom/features/bookings/lib/get-booking";
 import { getOrgFullOrigin, orgDomainConfig } from "@calcom/lib/orgDomains";
 import { getOrganizationSEOSettings } from "@calcom/features/ee/organizations/lib/orgSettings";
-import type { TeamData } from "@calcom/features/ee/teams/lib/getTeamData";
+import type { TeamData } from "@calcom/features/teams/lib/getTeamData";
 import { shouldHideBrandingForTeamEvent } from "@calcom/features/profile/lib/hideBranding";
 import { loadTranslations } from "@calcom/lib/server/i18n";
 import slugify from "@calcom/lib/slugify";

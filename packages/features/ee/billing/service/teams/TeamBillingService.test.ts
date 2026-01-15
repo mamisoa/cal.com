@@ -2,7 +2,7 @@ import prismaMock from "@calcom/testing/lib/__mocks__/prismaMock";
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-import { purchaseTeamOrOrgSubscription } from "@calcom/features/ee/teams/lib/payments";
+import { purchaseTeamOrOrgSubscription } from "@calcom/features/teams/lib/payments";
 import { WEBAPP_URL } from "@calcom/lib/constants";
 
 import type { IBillingRepository } from "../../repository/billing/IBillingRepository";
@@ -19,7 +19,7 @@ vi.mock("@calcom/lib/constants", async () => {
   };
 });
 
-vi.mock("@calcom/features/ee/teams/lib/payments", () => ({
+vi.mock("@calcom/features/teams/lib/payments", () => ({
   purchaseTeamOrOrgSubscription: vi.fn(),
 }));
 

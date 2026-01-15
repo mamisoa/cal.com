@@ -1,5 +1,5 @@
 import { TeamRepository } from "@calcom/ee/teams/repositories/TeamRepository";
-import { updateNewTeamMemberEventTypes } from "@calcom/features/ee/teams/lib/queries";
+import { updateNewTeamMemberEventTypes } from "@calcom/features/teams/lib/queries";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { prisma } from "@calcom/prisma";
 import type { Prisma } from "@calcom/prisma/client";

@@ -18,7 +18,7 @@ vi.mock("@calcom/ee/common/server/LicenseKeyService", () => ({
 
 vi.mock("@calcom/features/ee/organizations/lib/OrganizationPaymentService");
 
-vi.mock("@calcom/features/ee/teams/repositories/TeamRepository", () => ({
+vi.mock("@calcom/features/teams/repositories/TeamRepository", () => ({
   TeamRepository: class {
     constructor() {}
     findOwnedTeamsByUserId() {
