@@ -1,3 +1,4 @@
+import { format, parse, isValid, addDays } from "date-fns";
 import { useEffect } from "react";
 import type { z } from "zod";
 
@@ -13,6 +14,7 @@ import { AddressInput } from "@calcom/ui/components/address";
 import { InfoBadge } from "@calcom/ui/components/badge";
 import { Button } from "@calcom/ui/components/button";
 import { Label, CheckboxField, EmailField, InputField, Checkbox } from "@calcom/ui/components/form";
+import { DatePicker } from "@calcom/ui/components/form";
 import { Icon } from "@calcom/ui/components/icon";
 import { RadioGroup, RadioField } from "@calcom/ui/components/radio";
 import { Tooltip } from "@calcom/ui/components/tooltip";
@@ -29,6 +31,7 @@ export const isValidValueProp: Record<Component["propsType"], (val: unknown) => 
   text: (val) => typeof val === "string",
   textList: (val) => val instanceof Array && val.every((v) => typeof v === "string"),
   variants: (val) => (typeof val === "object" && val !== null) || typeof val === "string",
+  date: (val) => typeof val === "string" || val instanceof Date || val === undefined || val === null,
 };
 
 type Component =
@@ -79,6 +82,24 @@ type Component =
           variants: z.infer<typeof variantsConfigSchema>["variants"];
           value: Record<string, string> | string | undefined;
           setValue: (value: string | Record<string, string>) => void;
+        }
+      >(
+        props: TProps
+      ) => JSX.Element;
+    }
+  | {
+      propsType: "date";
+      factory: <
+        TProps extends {
+          name: string;
+          label?: string;
+          placeholder?: string;
+          readOnly?: boolean;
+          value: string | undefined;
+          setValue: (value: string | undefined) => void;
+          dateFormat?: string;
+          minDateRange?: string;
+          maxDateRange?: string;
         }
       >(
         props: TProps
@@ -553,6 +574,61 @@ export const Components: Record<FieldType, Component> = {
     propsType: propsTypes.url,
     factory: (props) => {
       return <Widgets.TextWidget type="url" autoComplete="url" noLabel={true} {...props} />;
+    },
+  },
+  date: {
+    propsType: propsTypes.date,
+    factory: function DateField({ value, setValue, readOnly, dateFormat, minDateRange, maxDateRange }) {
+      /**
+       * Parse relative date strings like "today", "today+7d", "today-30d"
+       */
+      const parseRelativeDate = (dateStr: string | undefined): Date | null => {
+        if (!dateStr) return null;
+
+        if (dateStr === "today") {
+          return new Date();
+        }
+
+        const relativeMatch = dateStr.match(/^today([+-])(\d+)d$/);
+        if (relativeMatch) {
+          const operator = relativeMatch[1];
+          const days = parseInt(relativeMatch[2], 10);
+          return addDays(new Date(), operator === "+" ? days : -days);
+        }
+
+        // Try parsing as ISO date
+        const parsed = new Date(dateStr);
+        return isValid(parsed) ? parsed : null;
+      };
+
+      const minDate = parseRelativeDate(minDateRange);
+      const maxDate = parseRelativeDate(maxDateRange);
+
+      // Parse the stored value (ISO format) to Date
+      const dateValue = value ? new Date(value) : new Date();
+      const displayFormat = dateFormat || "yyyy-MM-dd";
+
+      // Format the date for display
+      const formatDateForDisplay = (date: Date): string => {
+        try {
+          return format(date, displayFormat);
+        } catch {
+          return format(date, "yyyy-MM-dd");
+        }
+      };
+
+      return (
+        <DatePicker
+          date={isValid(dateValue) ? dateValue : new Date()}
+          onDatesChange={(newDate) => {
+            // Store in ISO format for consistency
+            setValue(format(newDate, "yyyy-MM-dd"));
+          }}
+          disabled={readOnly}
+          minDate={minDate}
+          label={value ? formatDateForDisplay(dateValue) : undefined}
+        />
+      );
     },
   },
 } as const;

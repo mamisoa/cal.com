@@ -1,3 +1,4 @@
+import { addDays, isValid, isAfter, isBefore, startOfDay } from "date-fns";
 import { z } from "zod";
 
 import { fieldSchema, fieldTypeEnum, variantsConfigSchema, type FieldType } from "@calcom/prisma/zod-utils";
@@ -26,6 +27,7 @@ export const fieldTypeConfigSchema = z
       .optional(),
     supportsPricing: z.boolean().default(false).optional(),
     optionsSupportPricing: z.boolean().default(false).optional(),
+    supportsDateConfig: z.boolean().default(false).optional(),
     propsType: z.enum([
       "text",
       "textList",
@@ -34,6 +36,7 @@ export const fieldTypeConfigSchema = z
       "boolean",
       "objectiveWithInput",
       "variants",
+      "date",
     ]),
     // It is the config that can tweak what an existing or a new field shows in the App UI or booker UI.
     variantsConfig: z
@@ -256,6 +259,81 @@ export const fieldTypesSchemaMap: Partial<
         code: z.ZodIssueCode.custom,
         message: m("url_validation_error"),
       });
+    },
+  },
+  date: {
+    preprocess: ({ response }) => {
+      // Return the response as-is (should be ISO date string)
+      return response?.trim() ?? "";
+    },
+    superRefine: ({ field, response, isPartialSchema, ctx, m }) => {
+      const value = response ?? "";
+
+      // If field is optional and value is empty, skip validation
+      if (!field.required && !value) {
+        return;
+      }
+
+      // If field is required and value is empty
+      if (field.required && !isPartialSchema && !value) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: m("error_required_field"),
+        });
+        return;
+      }
+
+      // Parse the date value
+      const dateValue = new Date(value);
+      if (!isValid(dateValue)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: m("date_validation_error") || "Invalid date format",
+        });
+        return;
+      }
+
+      /**
+       * Parse relative date strings like "today", "today+7d", "today-30d"
+       */
+      const parseRelativeDate = (dateStr: string | undefined): Date | null => {
+        if (!dateStr) return null;
+
+        if (dateStr === "today") {
+          return startOfDay(new Date());
+        }
+
+        const relativeMatch = dateStr.match(/^today([+-])(\d+)d$/);
+        if (relativeMatch) {
+          const operator = relativeMatch[1];
+          const days = parseInt(relativeMatch[2], 10);
+          return startOfDay(addDays(new Date(), operator === "+" ? days : -days));
+        }
+
+        // Try parsing as ISO date
+        const parsed = new Date(dateStr);
+        return isValid(parsed) ? startOfDay(parsed) : null;
+      };
+
+      // Validate minDateRange
+      const minDate = parseRelativeDate(field.minDateRange);
+      if (minDate && isBefore(startOfDay(dateValue), minDate)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: m("date_before_min") || "Date is before the minimum allowed date",
+        });
+        return;
+      }
+
+      // Validate maxDateRange
+      const maxDate = parseRelativeDate(field.maxDateRange);
+      if (maxDate && isAfter(startOfDay(dateValue), maxDate)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: m("date_after_max") || "Date is after the maximum allowed date",
+        });
+        return;
+      }
     },
   },
 };
