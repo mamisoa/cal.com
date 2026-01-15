@@ -9,15 +9,14 @@
  */
 
 // Usage event enum - kept for compatibility
-enum UsageEvent {
+export enum UsageEvent {
   BOOKING = "booking",
   USER = "user",
 }
 
 // Interface matching the original
-interface ILicenseKeyService {
-  // biome-ignore lint/suspicious/noExplicitAny: Matches original interface signature
-  incrementUsage(usageEvent?: UsageEvent): Promise<any>;
+export interface ILicenseKeyService {
+  incrementUsage(usageEvent?: UsageEvent): Promise<void>;
   checkLicense(): Promise<boolean>;
 }
 
@@ -28,8 +27,7 @@ class LicenseKeyService implements ILicenseKeyService {
   /**
    * Stub - no-op for usage tracking
    */
-  // biome-ignore lint/suspicious/noExplicitAny: Matches interface signature
-  async incrementUsage(_usageEvent?: UsageEvent): Promise<any> {
+  async incrementUsage(_usageEvent?: UsageEvent): Promise<void> {
     return Promise.resolve();
   }
 
@@ -58,9 +56,8 @@ class LicenseKeyService implements ILicenseKeyService {
 /**
  * NoopLicenseKeyService - also returns true for fork compatibility
  */
-class NoopLicenseKeyService implements ILicenseKeyService {
-  // biome-ignore lint/suspicious/noExplicitAny: Matches interface signature
-  async incrementUsage(_usageEvent?: UsageEvent): Promise<any> {
+export class NoopLicenseKeyService implements ILicenseKeyService {
+  async incrementUsage(_usageEvent?: UsageEvent): Promise<void> {
     return Promise.resolve();
   }
 
@@ -72,7 +69,7 @@ class NoopLicenseKeyService implements ILicenseKeyService {
 /**
  * Singleton for license key service access
  */
-class LicenseKeySingleton {
+export class LicenseKeySingleton {
   private static instance: ILicenseKeyService | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -86,9 +83,7 @@ class LicenseKeySingleton {
   }
 }
 
-// Function for simple imports
-const checkLicense = async (): Promise<boolean> => true;
+// Function export for simple imports
+export const checkLicense = async (): Promise<boolean> => true;
 
-// All exports at the end to satisfy biome lint/style/useExportsLast
-export { UsageEvent, type ILicenseKeyService, NoopLicenseKeyService, LicenseKeySingleton, checkLicense };
 export default LicenseKeyService;

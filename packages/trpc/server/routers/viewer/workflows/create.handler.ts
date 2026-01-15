@@ -1,5 +1,7 @@
-import emailReminderTemplate from "@calcom/ee/workflows/lib/reminders/templates/emailReminderTemplate";
+// AGPL Workflows - Replaced EE import
+
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
+import { emailReminderTemplate } from "@calcom/features/workflows";
 import { SENDER_NAME } from "@calcom/lib/constants";
 import { getTranslation } from "@calcom/lib/server/i18n";
 import { getTimeFormatStringFromUserTimeFormat } from "@calcom/lib/timeFormat";
@@ -48,42 +50,37 @@ export const createHandler = async ({ ctx, input }: CreateOptions) => {
       });
     }
   }
+  const workflow: Workflow = await prisma.workflow.create({
+    data: {
+      name: "",
+      trigger: WorkflowTriggerEvents.BEFORE_EVENT,
+      time: 24,
+      timeUnit: TimeUnit.HOUR,
+      userId,
+      teamId,
+    },
+  });
 
-  try {
-    const workflow: Workflow = await prisma.workflow.create({
-      data: {
-        name: "",
-        trigger: WorkflowTriggerEvents.BEFORE_EVENT,
-        time: 24,
-        timeUnit: TimeUnit.HOUR,
-        userId,
-        teamId,
-      },
-    });
+  const renderedEmailTemplate = emailReminderTemplate({
+    isEditingMode: true,
+    locale: ctx.user.locale,
+    t: await getTranslation(ctx.user.locale, "common"),
+    action: WorkflowActions.EMAIL_ATTENDEE,
+    timeFormat: getTimeFormatStringFromUserTimeFormat(ctx.user.timeFormat),
+  });
 
-    const renderedEmailTemplate = emailReminderTemplate({
-      isEditingMode: true,
-      locale: ctx.user.locale,
-      t: await getTranslation(ctx.user.locale, "common"),
+  await ctx.prisma.workflowStep.create({
+    data: {
+      stepNumber: 1,
       action: WorkflowActions.EMAIL_ATTENDEE,
-      timeFormat: getTimeFormatStringFromUserTimeFormat(ctx.user.timeFormat),
-    });
-
-    await ctx.prisma.workflowStep.create({
-      data: {
-        stepNumber: 1,
-        action: WorkflowActions.EMAIL_ATTENDEE,
-        template: WorkflowTemplates.REMINDER,
-        reminderBody: renderedEmailTemplate.emailBody,
-        emailSubject: renderedEmailTemplate.emailSubject,
-        workflowId: workflow.id,
-        sender: SENDER_NAME,
-        numberVerificationPending: false,
-        verifiedAt: new Date(),
-      },
-    });
-    return { workflow };
-  } catch (e) {
-    throw e;
-  }
+      template: WorkflowTemplates.REMINDER,
+      reminderBody: renderedEmailTemplate.emailBody,
+      emailSubject: renderedEmailTemplate.emailSubject,
+      workflowId: workflow.id,
+      sender: SENDER_NAME,
+      numberVerificationPending: false,
+      verifiedAt: new Date(),
+    },
+  });
+  return { workflow };
 };

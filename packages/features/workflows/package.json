@@ -1,0 +1,14 @@
+{
+  "name": "@calcom/features-workflows",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "license": "AGPL-3.0",
+  "description": "AGPL-licensed workflow automation for Cal.com bookings",
+  "dependencies": {
+    "@calcom/prisma": "*",
+    "@calcom/emails": "*",
+    "@calcom/lib": "*",
+    "@calcom/features": "*"
+  }
+}
