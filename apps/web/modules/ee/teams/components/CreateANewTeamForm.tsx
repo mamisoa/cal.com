@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { useOrgBranding } from "@calcom/features/ee/organizations/context/provider";
-import { subdomainSuffix } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { subdomainSuffix } from "@calcom/lib/orgDomains";
 import type { NewTeamFormValues } from "@calcom/features/ee/teams/lib/types";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import slugify from "@calcom/lib/slugify";

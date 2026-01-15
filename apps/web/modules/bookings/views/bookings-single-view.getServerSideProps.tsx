@@ -3,7 +3,7 @@ import type { GetServerSidePropsContext } from "next";
 import { z } from "zod";
 
 import { eventTypeMetaDataSchemaWithTypedApps } from "@calcom/app-store/zod-utils";
-import { orgDomainConfig } from "@calcom/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import getBookingInfo from "@calcom/features/bookings/lib/getBookingInfo";
 import { BookingRepository } from "@calcom/features/bookings/repositories/BookingRepository";

@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext } from "next";
 
 import { getBookerBaseUrlSync } from "@calcom/features/ee/organizations/lib/getBookerBaseUrlSync";
-import { orgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import {
   getOrganizationSettings,
   getVerifiedDomain,

@@ -1,4 +1,4 @@
-import { getSlugOrRequestedSlug } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { getSlugOrRequestedSlug } from "@calcom/lib/orgDomains";
 import { prisma } from "@calcom/prisma";
 
 export type TeamData = Awaited<ReturnType<typeof getTeamData>>;

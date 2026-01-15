@@ -49,7 +49,7 @@ vi.mock("@calcom/lib/constants", () => ({
   IS_TEAM_BILLING_ENABLED: false,
 }));
 
-vi.mock("@calcom/ee/organizations/lib/orgDomains", () => ({
+vi.mock("@calcom/lib/orgDomains", () => ({
   getOrgFullOrigin: vi.fn((slug: string) => `https://${slug}.cal.com`),
 }));
 

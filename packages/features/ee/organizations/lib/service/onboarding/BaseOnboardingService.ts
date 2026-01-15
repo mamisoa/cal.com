@@ -3,7 +3,7 @@ import type { TFunction } from "i18next";
 import { sendOrganizationCreationEmail } from "@calcom/emails/organization-email-service";
 import { sendEmailVerification } from "@calcom/features/auth/lib/verifyEmail";
 import { getOrganizationRepository } from "@calcom/features/ee/organizations/di/OrganizationRepository.container";
-import { getOrgFullOrigin } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import {
   assertCanCreateOrg,
   findUserToBeOrgOwner,

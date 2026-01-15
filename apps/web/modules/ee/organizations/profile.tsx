@@ -8,7 +8,7 @@ import { z } from "zod";
 
 import LicenseRequired from "~/ee/common/components/LicenseRequired";
 import { useOrgBranding } from "@calcom/features/ee/organizations/context/provider";
-import { subdomainSuffix } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { subdomainSuffix } from "@calcom/lib/orgDomains";
 import SectionBottomActions from "@calcom/features/settings/SectionBottomActions";
 import { getPlaceholderAvatar } from "@calcom/lib/defaultAvatarImage";
 import { useLocale } from "@calcom/lib/hooks/useLocale";

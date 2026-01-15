@@ -1,7 +1,7 @@
 import process from "node:process";
 import type { Dayjs } from "@calcom/dayjs";
 import dayjs from "@calcom/dayjs";
-import { orgDomainConfig } from "@calcom/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import { getAggregatedAvailability } from "@calcom/features/availability/lib/getAggregatedAvailability/getAggregatedAvailability";
 import type {
   CurrentSeats,

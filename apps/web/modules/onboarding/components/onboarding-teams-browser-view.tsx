@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-import { subdomainSuffix } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { subdomainSuffix } from "@calcom/lib/orgDomains";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { Avatar } from "@calcom/ui/components/avatar";
 import { Icon } from "@calcom/ui/components/icon";

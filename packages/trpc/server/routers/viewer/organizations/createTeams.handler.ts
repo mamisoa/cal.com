@@ -1,4 +1,4 @@
-import { getOrgFullOrigin } from "@calcom/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import { CreditService } from "@calcom/features/ee/billing/credit-service";
 import stripe from "@calcom/features/ee/payments/server/stripe";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";

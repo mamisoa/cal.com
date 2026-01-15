@@ -43,7 +43,7 @@ vi.mock("@calcom/features/eventtypes/lib/eventNaming", () => ({
   getEventName: vi.fn(),
 }));
 
-vi.mock("@calcom/ee/organizations/lib/orgDomains", () => ({
+vi.mock("@calcom/lib/orgDomains", () => ({
   getOrgFullOrigin: vi.fn(),
 }));
 

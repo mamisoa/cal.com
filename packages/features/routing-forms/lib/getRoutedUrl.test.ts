@@ -9,7 +9,7 @@ import { getResponseToStore } from "@calcom/app-store/routing-forms/lib/getRespo
 import { getSerializableForm } from "@calcom/app-store/routing-forms/lib/getSerializableForm";
 import { findMatchingRoute } from "@calcom/app-store/routing-forms/lib/processRoute";
 import { substituteVariables } from "@calcom/app-store/routing-forms/lib/substituteVariables";
-import { orgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import { isAuthorizedToViewFormOnOrgDomain } from "@calcom/features/routing-forms/lib/isAuthorizedToViewForm";
 import { PrismaRoutingFormRepository } from "@calcom/features/routing-forms/repositories/PrismaRoutingFormRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
@@ -31,7 +31,7 @@ vi.mock("@calcom/features/users/repositories/UserRepository", () => {
     }; }),
   };
 });
-vi.mock("@calcom/features/ee/organizations/lib/orgDomains");
+vi.mock("@calcom/lib/orgDomains");
 vi.mock("@calcom/features/routing-forms/lib/isAuthorizedToViewForm");
 vi.mock("@calcom/app-store/routing-forms/lib/getSerializableForm");
 vi.mock("@calcom/app-store/routing-forms/lib/getResponseToStore");

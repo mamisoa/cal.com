@@ -3,7 +3,7 @@ import type { PageProps as _PageProps } from "app/_types";
 import { generateMeetingMetadata } from "app/_utils";
 import { headers, cookies } from "next/headers";
 
-import { getOrgFullOrigin } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 
 import { buildLegacyCtx, decodeParams } from "@lib/buildLegacyCtx";
 import { getServerSideProps } from "@lib/org/[orgSlug]/instant-meeting/team/[slug]/[type]/getServerSideProps";

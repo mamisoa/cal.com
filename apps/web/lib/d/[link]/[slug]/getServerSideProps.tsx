@@ -5,7 +5,7 @@ import { z } from "zod";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { getBookingForReschedule, getMultipleDurationValue } from "@calcom/features/bookings/lib/get-booking";
 import type { GetBookingType } from "@calcom/features/bookings/lib/get-booking";
-import { orgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import { EventRepository } from "@calcom/features/eventtypes/repositories/EventRepository";
 import { FeaturesRepository } from "@calcom/features/flags/features.repository";
 import {

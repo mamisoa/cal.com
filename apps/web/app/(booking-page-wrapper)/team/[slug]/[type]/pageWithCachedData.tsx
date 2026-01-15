@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { getBookingForReschedule, type GetBookingType } from "@calcom/features/bookings/lib/get-booking";
-import { getOrgFullOrigin, orgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin, orgDomainConfig } from "@calcom/lib/orgDomains";
 import { getOrganizationSEOSettings } from "@calcom/features/ee/organizations/lib/orgSettings";
 import type { TeamData } from "@calcom/features/ee/teams/lib/getTeamData";
 import { shouldHideBrandingForTeamEvent } from "@calcom/features/profile/lib/hideBranding";

@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import type { TFunction } from "i18next";
 
-import { getOrgFullOrigin } from "@calcom/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import { sendTeamInviteEmail } from "@calcom/emails/organization-email-service";
 import { checkAdminOrOwner } from "@calcom/features/auth/lib/checkAdminOrOwner";
 import { getParsedTeam } from "@calcom/features/ee/teams/lib/getParsedTeam";

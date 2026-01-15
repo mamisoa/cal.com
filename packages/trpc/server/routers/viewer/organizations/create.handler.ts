@@ -1,6 +1,6 @@
 import { lookup } from "node:dns";
 
-import { getOrgFullOrigin } from "@calcom/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import { isNotACompanyEmail } from "@calcom/ee/organizations/lib/server/orgCreationUtils";
 import { sendAdminOrganizationNotification, sendOrganizationCreationEmail } from "@calcom/emails/organization-email-service";
 import { sendEmailVerification } from "@calcom/features/auth/lib/verifyEmail";

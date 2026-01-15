@@ -13,7 +13,7 @@ import { getServerTimingHeader } from "@calcom/app-store/routing-forms/lib/getSe
 import { findMatchingRoute } from "@calcom/app-store/routing-forms/lib/processRoute";
 import { substituteVariables } from "@calcom/app-store/routing-forms/lib/substituteVariables";
 import type { FormResponse } from "@calcom/app-store/routing-forms/types/types";
-import { orgDomainConfig } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { orgDomainConfig } from "@calcom/lib/orgDomains";
 import { isAuthorizedToViewFormOnOrgDomain } from "@calcom/features/routing-forms/lib/isAuthorizedToViewForm";
 import { PrismaRoutingFormRepository } from "@calcom/features/routing-forms/repositories/PrismaRoutingFormRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";

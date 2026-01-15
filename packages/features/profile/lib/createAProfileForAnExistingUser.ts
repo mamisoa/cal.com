@@ -1,4 +1,4 @@
-import { getOrgFullOrigin } from "@calcom/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
 import { getOrgUsernameFromEmail } from "@calcom/features/auth/signup/utils/getOrgUsernameFromEmail";
 import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";

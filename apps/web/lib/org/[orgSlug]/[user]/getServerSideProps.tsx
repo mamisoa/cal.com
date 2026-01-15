@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext } from "next";
 
-import { getSlugOrRequestedSlug } from "@calcom/features/ee/organizations/lib/orgDomains";
+import { getSlugOrRequestedSlug } from "@calcom/lib/orgDomains";
 import prisma from "@calcom/prisma";
 
 import { getServerSideProps as GSSTeamPage } from "@lib/team/[slug]/getServerSideProps";

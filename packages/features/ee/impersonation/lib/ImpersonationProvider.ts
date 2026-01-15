@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 
 import { ensureOrganizationIsReviewed } from "@calcom/ee/organizations/lib/ensureOrganizationIsReviewed";
-import { getOrgFullOrigin, subdomainSuffix } from "@calcom/ee/organizations/lib/orgDomains";
+import { getOrgFullOrigin, subdomainSuffix } from "@calcom/lib/orgDomains";
 import { getSession } from "@calcom/features/auth/lib/getSession";
 import { getSpecificPermissions } from "@calcom/features/pbac/lib/resource-permissions";
 import { ProfileRepository } from "@calcom/features/profile/repositories/ProfileRepository";
