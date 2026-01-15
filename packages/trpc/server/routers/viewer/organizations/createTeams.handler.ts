@@ -1,5 +1,5 @@
 import { getOrgFullOrigin } from "@calcom/lib/orgDomains";
-import { CreditService } from "@calcom/features/ee/billing/credit-service";
+import { CreditServiceStub as CreditService } from "@calcom/features/billing";
 import stripe from "@calcom/features/ee/payments/server/stripe";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";

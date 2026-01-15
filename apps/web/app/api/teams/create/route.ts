@@ -7,8 +7,9 @@ import { z } from "zod";
 import {
   getBillingProviderService,
   getTeamBillingServiceFactory,
-} from "@calcom/features/ee/billing/di/containers/Billing";
-import { Plan, SubscriptionStatus } from "@calcom/features/ee/billing/repository/billing/IBillingRepository";
+  Plan,
+  SubscriptionStatus,
+} from "@calcom/features/billing";
 import stripe from "@calcom/features/ee/payments/server/stripe";
 import { WEBAPP_URL } from "@calcom/lib/constants";
 import { HttpError } from "@calcom/lib/http-error";

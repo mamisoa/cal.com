@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-import { SubscriptionStatus } from "@calcom/ee/billing/repository/billing/IBillingRepository";
+import { SubscriptionStatus } from "@calcom/features/billing";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";
 import { prisma } from "@calcom/prisma";
 

@@ -5,7 +5,7 @@ import type { ActionSource } from "@calcom/features/booking-audit/lib/types/acti
 import { getBookingEventHandlerService } from "@calcom/features/bookings/di/BookingEventHandlerService.container";
 import type { EventManagerUser } from "@calcom/features/bookings/lib/EventManager";
 import EventManager, { placeholderCreatedEvent } from "@calcom/features/bookings/lib/EventManager";
-import { CreditService } from "@calcom/features/ee/billing/credit-service";
+import { CreditServiceStub as CreditService } from "@calcom/features/billing";
 import { getBookerBaseUrl } from "@calcom/features/ee/organizations/lib/getBookerUrlServer";
 // AGPL Workflows - Replaced EE imports
 import {

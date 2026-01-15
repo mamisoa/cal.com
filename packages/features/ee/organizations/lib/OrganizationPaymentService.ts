@@ -1,5 +1,4 @@
-import { getBillingProviderService } from "@calcom/features/ee/billing/di/containers/Billing";
-import type { StripeBillingService } from "@calcom/features/ee/billing/service/billingProvider/StripeBillingService";
+import { getBillingProviderService, type StripeBillingService } from "@calcom/features/billing";
 import { OrganizationOnboardingRepository } from "@calcom/features/organizations/repositories/OrganizationOnboardingRepository";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { ORGANIZATION_SELF_SERVE_PRICE, WEBAPP_URL, ORG_TRIAL_DAYS } from "@calcom/lib/constants";

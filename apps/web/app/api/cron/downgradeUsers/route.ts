@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import { getTeamBillingServiceFactory } from "@calcom/features/ee/billing/di/containers/Billing";
+import { getTeamBillingServiceFactory } from "@calcom/features/billing";
 import prisma from "@calcom/prisma";
 
 const querySchema = z.object({

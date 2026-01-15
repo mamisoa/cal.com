@@ -1,5 +1,5 @@
 import dayjs from "@calcom/dayjs";
-import { CreditService } from "@calcom/features/ee/billing/credit-service";
+import { CreditServiceStub as CreditService } from "@calcom/features/billing";
 import { getSenderId } from "@calcom/features/ee/workflows/lib/alphanumericSenderIdSupport";
 import { sendSmsOrFallbackEmail } from "@calcom/features/ee/workflows/lib/reminders/messageDispatcher";
 import { SENDER_ID } from "@calcom/lib/constants";

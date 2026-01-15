@@ -6,7 +6,7 @@ import { getAllCredentialsIncludeServiceAccountKey } from "@calcom/features/book
 import { handleBookingRequested } from "@calcom/features/bookings/lib/handleBookingRequested";
 import { handleConfirmation } from "@calcom/features/bookings/lib/handleConfirmation";
 import { getBooking } from "@calcom/features/bookings/lib/payment/getBooking";
-import { CreditService } from "@calcom/features/ee/billing/credit-service";
+import { CreditServiceStub as CreditService } from "@calcom/features/billing";
 import { getBookerBaseUrl } from "@calcom/features/ee/organizations/lib/getBookerUrlServer";
 import { getAllWorkflowsFromEventType } from "@calcom/features/ee/workflows/lib/getAllWorkflowsFromEventType";
 import { WorkflowService } from "@calcom/features/ee/workflows/lib/service/WorkflowService";

@@ -1,6 +1,6 @@
 import { type TFunction } from "i18next";
 
-import { getTeamBillingServiceFactory } from "@calcom/ee/billing/di/containers/Billing";
+import { getTeamBillingServiceFactory } from "@calcom/features/billing";
 import { PermissionCheckService } from "@calcom/features/pbac/services/permission-check.service";
 import { UserRepository } from "@calcom/features/users/repositories/UserRepository";
 import { checkRateLimitAndThrowError } from "@calcom/lib/checkRateLimitAndThrowError";

@@ -4,9 +4,12 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { z } from "zod";
 
-import { getBillingProviderService } from "@calcom/ee/billing/di/containers/Billing";
-import { getTeamBillingServiceFactory } from "@calcom/ee/billing/di/containers/Billing";
-import { Plan, SubscriptionStatus } from "@calcom/features/ee/billing/repository/billing/IBillingRepository";
+import {
+  getBillingProviderService,
+  getTeamBillingServiceFactory,
+  Plan,
+  SubscriptionStatus,
+} from "@calcom/features/billing";
 import stripe from "@calcom/features/ee/payments/server/stripe";
 import { HttpError } from "@calcom/lib/http-error";
 import { prisma } from "@calcom/prisma";

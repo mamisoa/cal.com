@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
 
-import { getTeamBillingServiceFactory } from "@calcom/ee/billing/di/containers/Billing";
+import { getTeamBillingServiceFactory } from "@calcom/features/billing";
 import { deleteWorkfowRemindersOfRemovedMember } from "@calcom/features/ee/teams/lib/deleteWorkflowRemindersOfRemovedMember";
 import { updateNewTeamMemberEventTypes } from "@calcom/features/ee/teams/lib/queries";
 import { TeamRepository } from "@calcom/features/ee/teams/repositories/TeamRepository";

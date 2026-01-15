@@ -1,4 +1,4 @@
-import { getBillingProviderService } from "@calcom/ee/billing/di/containers/Billing";
+import { getBillingProviderService } from "@calcom/features/billing";
 import { TeamRepository } from "@calcom/features/teams/repositories/TeamRepository";
 import { TeamService } from "@calcom/features/teams/services/teamService";
 import { MembershipRepository } from "@calcom/features/membership/repositories/MembershipRepository";

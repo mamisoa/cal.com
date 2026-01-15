@@ -1,0 +1,8 @@
+{
+  "name": "@calcom/features/billing",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "license": "AGPL-3.0",
+  "description": "AGPL-3.0 licensed billing module for Cal.com with Stripe support"
+}

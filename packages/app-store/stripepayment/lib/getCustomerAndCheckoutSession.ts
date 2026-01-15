@@ -1,4 +1,4 @@
-import { getBillingProviderService } from "@calcom/features/ee/billing/di/containers/Billing";
+import { getBillingProviderService } from "@calcom/features/billing";
 
 export async function getCustomerAndCheckoutSession(checkoutSessionId: string) {
   const billingService = getBillingProviderService();
